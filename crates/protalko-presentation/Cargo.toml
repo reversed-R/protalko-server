@@ -1,0 +1,9 @@
+[package]
+name = "protalko-presentation"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+protalko-domain = { path = "../protalko-domain"}
+protalko-use-case = { path = "../protalko-use-case"}
+protalko-infrastructure = { path = "../protalko-infrastructure"}

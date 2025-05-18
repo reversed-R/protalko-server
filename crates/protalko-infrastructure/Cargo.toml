@@ -1,0 +1,7 @@
+[package]
+name = "protalko-infrastructure"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+protalko-domain = { path = "../protalko-domain"}
