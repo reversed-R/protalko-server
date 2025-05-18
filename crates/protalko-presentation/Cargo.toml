@@ -7,3 +7,5 @@ edition.workspace = true
 protalko-domain = { path = "../protalko-domain"}
 protalko-use-case = { path = "../protalko-use-case"}
 protalko-infrastructure = { path = "../protalko-infrastructure"}
+tokio.workspace = true
+axum.workspace = true
