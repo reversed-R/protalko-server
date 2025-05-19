@@ -1,7 +1,4 @@
-use crate::entities::{
-    community::{CommunityId, CommunityMember},
-    user::UserId,
-};
+use crate::entities::{community::CommunityId, community_member::CommunityMember, user::UserId};
 
 use thiserror;
 

@@ -1,7 +1,4 @@
-use crate::{
-    entities::user::{UserId, UserName},
-    value_object,
-};
+use crate::{entities::community_member::CommunityMember, value_object};
 use getset::Getters;
 use uuid::Uuid;
 
@@ -25,14 +22,3 @@ pub struct Community {
 
 value_object!(CommunityId(Uuid));
 value_object!(CommunityName(String));
-
-#[derive(Clone, Getters)]
-pub struct CommunityMember {
-    #[getset(get = "pub")]
-    id: UserId,
-    #[getset(get = "pub")]
-    name: UserName,
-    // TODO:
-    // #[getset(get = "pub")]
-    // roles: Vec<CommunityRoleId>,
-}
