@@ -1,4 +1,4 @@
-use crate::{entities::user::UserId, shared::datetime::DateTime, value_object};
+use crate::{entities::user::UserId, value_object, value_objects::datetime::DateTime};
 use getset::Getters;
 use uuid::Uuid;
 
