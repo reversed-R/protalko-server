@@ -4,3 +4,7 @@ version.workspace = true
 edition.workspace = true
 
 [dependencies]
+getset.workspace = true
+uuid.workspace = true
+chrono.workspace = true
+thiserror.workspace = true

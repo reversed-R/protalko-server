@@ -1,3 +1,7 @@
+pub mod entities;
+pub mod repositories;
+pub mod value_objects;
+
 pub fn add(left: u64, right: u64) -> u64 {
     left + right
 }
