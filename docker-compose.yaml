@@ -1,0 +1,12 @@
+services:
+  app:
+    build:
+      dockerfile: dev.Dockerfile
+      context: .
+    command:
+      - /bin/bash
+      - -c
+      - |
+        cargo run protalko-presentation
+    ports:
+      - 8080:8080
