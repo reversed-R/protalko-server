@@ -7,6 +7,35 @@ services:
       - /bin/bash
       - -c
       - |
+        cargo sqlx migrate run
         cargo run protalko-presentation
     ports:
       - 8080:8080
+    volumes:
+      - .:/app:cached
+    restart: always
+    networks:
+      - app-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:17-bullseye
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    env_file:
+      - .env
+    networks:
+      - app-network
+    healthcheck:
+      test: pg_isready -U "${POSTGRES_USER}" || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  app-network:
+
+volumes:
+  postgres-data:
