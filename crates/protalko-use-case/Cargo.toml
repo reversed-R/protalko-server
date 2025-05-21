@@ -5,3 +5,5 @@ edition.workspace = true
 
 [dependencies]
 protalko-domain = { path = "../protalko-domain"}
+
+thiserror.workspace = true
