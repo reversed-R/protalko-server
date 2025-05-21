@@ -13,7 +13,7 @@ services:
       - 8080:8080
     volumes:
       - .:/app:cached
-    restart: always
+    restart: no
     networks:
       - app-network
     depends_on:
@@ -30,8 +30,8 @@ services:
       - app-network
     healthcheck:
       test: pg_isready -U "${POSTGRES_USER}" || exit 1
-      interval: 10s
-      timeout: 5s
+      interval: 5s
+      timeout: 3s
       retries: 5
 
 networks:
