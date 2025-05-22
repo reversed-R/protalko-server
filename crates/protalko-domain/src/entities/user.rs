@@ -2,7 +2,7 @@ use crate::value_object;
 use getset::Getters;
 use uuid::Uuid;
 
-#[derive(Clone, Getters)]
+#[derive(Clone, Getters, Debug)]
 pub struct User {
     #[getset(get = "pub")]
     id: UserId,

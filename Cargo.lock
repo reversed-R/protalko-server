@@ -1158,10 +1158,13 @@ name = "protalko-presentation"
 version = "0.1.0"
 dependencies = [
  "axum",
+ "dotenvy",
  "protalko-domain",
  "protalko-infrastructure",
  "protalko-use-case",
+ "thiserror",
  "tokio",
+ "uuid",
 ]
 
 [[package]]
@@ -1169,6 +1172,7 @@ name = "protalko-use-case"
 version = "0.1.0"
 dependencies = [
  "protalko-domain",
+ "thiserror",
 ]
 
 [[package]]
