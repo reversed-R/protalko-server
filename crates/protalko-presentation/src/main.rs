@@ -3,14 +3,13 @@ mod models;
 mod modules;
 mod routes;
 
-use std::sync::Arc;
-
-use axum::{routing::get, Router};
-use config::Config;
+use crate::config::Config;
 use protalko_domain::{
     entities::user::UserId,
     repositories::{user::UserRepository, Repositories},
 };
+
+use std::sync::Arc;
 use uuid;
 
 #[tokio::main]
@@ -38,9 +37,7 @@ async fn main() {
         }
     }
 
-    let app = Router::new()
-        .route("/", get(root_handler))
-        .with_state(Arc::new(modules));
+    let app = routes::router(Arc::new(modules));
 
     let listener = tokio::net::TcpListener::bind("0.0.0.0:8080").await.unwrap();
     axum::serve(listener, app).await.unwrap();

@@ -14,3 +14,7 @@ impl ErrorModel {
         Self { status, message }
     }
 }
+
+pub trait IntoErrorModel {
+    fn into_error_model(self) -> ErrorModel;
+}

@@ -4,6 +4,10 @@ use protalko_domain::{
         user::{UserRepository, UserRepositoryError},
         Repositories,
     },
+    value_objects::{
+        error::{ErrorModel, IntoErrorModel},
+        response_status::Status,
+    },
 };
 
 use crate::user::UserUseCase;
@@ -16,6 +20,20 @@ pub enum UserUseCaseError {
     UserRepositoryError(#[from] UserRepositoryError),
     #[error("User Not Found (0:?)")]
     UserNotFoundError(UserId),
+}
+
+impl IntoErrorModel for UserUseCaseError {
+    fn into_error_model(self) -> ErrorModel {
+        match self {
+            Self::UserNotFoundError(e) => ErrorModel::new(
+                Status::NotFound,
+                format!("user/not-found:{}", e.value().hyphenated()).to_string(),
+            ),
+            Self::UserRepositoryError(_) => {
+                ErrorModel::new(Status::InternalServerError, "user/repository".to_string())
+            }
+        }
+    }
 }
 
 impl<R: Repositories> UserUseCase<R> {
