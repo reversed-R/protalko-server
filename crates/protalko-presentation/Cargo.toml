@@ -12,3 +12,4 @@ axum.workspace = true
 dotenvy.workspace = true
 uuid.workspace = true
 thiserror.workspace = true
+serde.workspace = true
