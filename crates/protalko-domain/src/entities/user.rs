@@ -2,7 +2,7 @@ use crate::value_object;
 use getset::Getters;
 use uuid::Uuid;
 
-#[derive(Clone, Getters)]
+#[derive(Clone, Getters, Debug)]
 pub struct User {
     #[getset(get = "pub")]
     id: UserId,
@@ -10,6 +10,16 @@ pub struct User {
     visible_id: UserVisibleId,
     #[getset(get = "pub")]
     name: UserName,
+}
+
+impl User {
+    pub fn new(id: UserId, visible_id: UserVisibleId, name: UserName) -> Self {
+        Self {
+            id,
+            visible_id,
+            name,
+        }
+    }
 }
 
 value_object!(UserId(Uuid));

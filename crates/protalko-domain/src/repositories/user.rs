@@ -3,11 +3,14 @@ use crate::entities::user::{User, UserId};
 use thiserror;
 
 #[derive(Debug, thiserror::Error)]
-pub enum UserRepositoryError {}
+pub enum UserRepositoryError {
+    #[error("Internal Error: {0:?}")]
+    InternalError(String),
+}
 
 #[allow(async_fn_in_trait)]
 pub trait UserRepository: Send + Sync + 'static {
-    async fn create(&self, user: User) -> Result<Option<UserId>, UserRepositoryError>;
+    async fn create(&self, user: User) -> Result<UserId, UserRepositoryError>;
 
     async fn update(&self, user: User) -> Result<(), UserRepositoryError>;
 

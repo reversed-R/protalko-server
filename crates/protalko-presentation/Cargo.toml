@@ -9,3 +9,6 @@ protalko-use-case = { path = "../protalko-use-case"}
 protalko-infrastructure = { path = "../protalko-infrastructure"}
 tokio.workspace = true
 axum.workspace = true
+dotenvy.workspace = true
+uuid.workspace = true
+thiserror.workspace = true

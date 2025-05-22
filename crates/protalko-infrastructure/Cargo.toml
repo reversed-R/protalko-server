@@ -5,3 +5,8 @@ edition.workspace = true
 
 [dependencies]
 protalko-domain = { path = "../protalko-domain"}
+sqlx.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+thiserror.workspace = true
+uuid.workspace = true
