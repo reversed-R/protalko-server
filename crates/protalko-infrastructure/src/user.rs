@@ -1,7 +1,7 @@
 use std::ops::Deref;
 
 use protalko_domain::{
-    entities::user::{User, UserId, UserName, UserVisibleId},
+    entities::user::{User, UserId, UserName, UserVisibleId, UserWithoutId},
     repositories::user::{UserRepository, UserRepositoryError},
 };
 
@@ -41,7 +41,7 @@ impl PgUserRepository {
 }
 
 impl UserRepository for PgUserRepository {
-    async fn create(&self, user: User) -> Result<UserId, UserRepositoryError> {
+    async fn create(&self, user: UserWithoutId) -> Result<UserId, UserRepositoryError> {
         let res = sqlx::query_as!(
             UserIdColumn,
             r#"

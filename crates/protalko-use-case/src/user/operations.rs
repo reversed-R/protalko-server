@@ -1,5 +1,5 @@
 use protalko_domain::{
-    entities::user::{User, UserId},
+    entities::user::{User, UserId, UserWithoutId},
     repositories::{
         user::{UserRepository, UserRepositoryError},
         Repositories,
@@ -14,10 +14,12 @@ use thiserror::Error;
 pub enum UserUseCaseError {
     #[error(transparent)]
     UserRepositoryError(#[from] UserRepositoryError),
+    #[error("User Not Found (0:?)")]
+    UserNotFoundError(UserId),
 }
 
 impl<R: Repositories> UserUseCase<R> {
-    pub async fn create(&self, user: User) -> Result<UserId, UserUseCaseError> {
+    pub async fn create(&self, user: UserWithoutId) -> Result<UserId, UserUseCaseError> {
         let res = self.repositories.user_repository().create(user).await;
 
         match res {
@@ -25,5 +27,38 @@ impl<R: Repositories> UserUseCase<R> {
             Err(e) => Err(UserUseCaseError::UserRepositoryError(e)),
         }
     }
-}
 
+    pub async fn update(&self, user: User) -> Result<(), UserUseCaseError> {
+        let res = self.repositories.user_repository().update(user).await;
+
+        match res {
+            Ok(()) => Ok(()),
+            Err(e) => Err(UserUseCaseError::UserRepositoryError(e)),
+        }
+    }
+
+    pub async fn get_by_id(&self, id: UserId) -> Result<User, UserUseCaseError> {
+        let res = self
+            .repositories
+            .user_repository()
+            .get_by_id(id.clone())
+            .await;
+
+        match res {
+            Ok(optional) => match optional {
+                Some(u) => Ok(u),
+                None => Err(UserUseCaseError::UserNotFoundError(id)),
+            },
+            Err(e) => Err(UserUseCaseError::UserRepositoryError(e)),
+        }
+    }
+
+    pub async fn delete_by_id(&self, id: UserId) -> Result<(), UserUseCaseError> {
+        let res = self.repositories.user_repository().delete_by_id(id).await;
+
+        match res {
+            Ok(()) => Ok(()),
+            Err(e) => Err(UserUseCaseError::UserRepositoryError(e)),
+        }
+    }
+}

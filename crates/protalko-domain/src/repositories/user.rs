@@ -1,4 +1,4 @@
-use crate::entities::user::{User, UserId};
+use crate::entities::user::{User, UserId, UserWithoutId};
 
 use thiserror;
 
@@ -10,7 +10,7 @@ pub enum UserRepositoryError {
 
 #[allow(async_fn_in_trait)]
 pub trait UserRepository: Send + Sync + 'static {
-    async fn create(&self, user: User) -> Result<UserId, UserRepositoryError>;
+    async fn create(&self, user: UserWithoutId) -> Result<UserId, UserRepositoryError>;
 
     async fn update(&self, user: User) -> Result<(), UserRepositoryError>;
 
