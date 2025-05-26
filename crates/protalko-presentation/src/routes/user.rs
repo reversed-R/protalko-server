@@ -19,6 +19,19 @@ use axum::{
 use std::sync::Arc;
 use uuid::Uuid;
 
+#[utoipa::path(
+    get,
+    path = "/users/{user_id}",
+    operation_id = "getUserById",
+    tag = "users",
+    responses(
+        (status = 200, description = "OK", body = UserPresentation),
+        (status = 400, description = "Bad Request", body = crate::models::error::ErrorResponse),
+        (status = 422, description = "Unprocessable Entity", body = crate::models::error::ErrorResponse),
+        (status = 500, description = "Internal Server Error", body = crate::models::error::ErrorResponse),
+    ),
+    security(()),
+)]
 pub async fn handle_get_by_id(
     State(modules): State<Arc<Modules<DefaultRepositories>>>,
     Path(raw_user_id): Path<String>,

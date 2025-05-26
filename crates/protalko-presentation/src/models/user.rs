@@ -1,19 +1,20 @@
 use protalko_domain::entities::user::User;
 use serde::{Deserialize, Serialize};
+use utoipa::ToSchema;
 
-#[derive(Deserialize)]
+#[derive(Deserialize, ToSchema)]
 pub struct CreateUserPresentation {
     pub visible_id: String,
     pub name: String,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, ToSchema)]
 pub struct UpdateUserPresentation {
     pub visible_id: String,
     pub name: String,
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, ToSchema)]
 pub struct UserPresentation {
     pub id: String,
     pub visible_id: String,

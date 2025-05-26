@@ -6,6 +6,7 @@ use axum::{
     Json,
 };
 use serde::Serialize;
+use utoipa::ToSchema;
 
 pub struct AppError {
     status_code: StatusCode,
@@ -33,7 +34,7 @@ impl From<ErrorModel> for AppError {
     }
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, ToSchema)]
 pub struct ErrorResponse {
     message: String,
 }
