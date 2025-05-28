@@ -18,7 +18,7 @@ pub fn router(modules: Arc<Modules<DefaultRepositories>>) -> Router {
 use crate::routes;
 #[derive(OpenApi)]
 #[openapi(
-    info(title = "Protalko API"),
+    info(title = "Protalko API", license(name = "MIT", identifier = "MIT")),
     tags(
         (name = "health", description = "APIの正常性チェック"),
         (name = "user", description = "ユーザー関連の操作"),
