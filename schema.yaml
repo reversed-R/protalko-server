@@ -27,6 +27,44 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
       security:
       - {}
+  /users:
+    post:
+      tags:
+      - users
+      operationId: postUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserPresentation'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatedUserPresentation'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - {}
   /users/{user_id}:
     get:
       tags:
@@ -67,6 +105,23 @@ paths:
       - {}
 components:
   schemas:
+    CreateUserPresentation:
+      type: object
+      required:
+      - visible_id
+      - name
+      properties:
+        name:
+          type: string
+        visible_id:
+          type: string
+    CreatedUserPresentation:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
     ErrorResponse:
       type: object
       required:

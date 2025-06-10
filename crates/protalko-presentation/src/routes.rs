@@ -4,13 +4,14 @@ pub mod user;
 use crate::modules::Modules;
 use protalko_infrastructure::shared::DefaultRepositories;
 
-use axum::{routing::get, Router};
+use axum::{routing::{get, post}, Router};
 use std::sync::Arc;
 use utoipa::OpenApi;
 
 pub fn router(modules: Arc<Modules<DefaultRepositories>>) -> Router {
     Router::new()
         .route("/health", get(health::handle_health))
+        .route("/users", post(user::handle_post))
         .route("/users/{user_id}", get(user::handle_get_by_id))
         .with_state(modules)
 }
@@ -25,7 +26,8 @@ use crate::routes;
     ), 
     paths(
         routes::health::handle_health,
-        routes::user::handle_get_by_id
+        routes::user::handle_get_by_id,
+        routes::user::handle_post
     )
 )]
 pub struct ApiDocs;
